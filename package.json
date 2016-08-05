@@ -10,9 +10,10 @@
   },
   "scripts": {
     "clean": "rimraf dist",
+    "lint": "eslint src test",
     "build": "rollup -c",
     "ugl": "uglifyjs dist/* -c -m -o dist/",
-    "test": "",
+    "test": "npm run lint",
     "prepublish": "npm test"
   },
   "repository": {
@@ -33,14 +34,20 @@
   ],
   "devDependencies": {
     "babel-cli": "6.11.4",
-    "babel-polyfill": "6.13.0",
+    "babel-eslint": "^6.1.2",
     "babel-preset-es2015": "6.13.0",
     "babel-preset-es2015-rollup": "1.1.1",
     "chai": "^3.5.0",
+    "eslint": "^3.2.2",
+    "eslint-config-airbnb-base": "^5.0.1",
+    "eslint-plugin-import": "^1.12.0",
     "mocha": "^3.0.1",
     "rimraf": "2.5.4",
     "rollup": "0.34.3",
     "rollup-plugin-babel": "2.6.1",
     "rollup-plugin-uglify": "^1.0.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.13.0"
   }
 }
