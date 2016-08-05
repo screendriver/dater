@@ -1,0 +1,36 @@
+{
+  "name": "dater-cli",
+  "version": "0.0.1",
+  "description": "Rename photos based on their date taken",
+  "license": "MIT",
+  "author": "Christian Rackerseder <github@echooff.de>",
+  "main": "src/dater.js",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "build": "babel src -d dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/screendriver/dater-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/screendriver/dater-cli/issues"
+  },
+  "homepage": "https://github.com/screendriver/dater-cli#readme",
+  "keywords": [
+    "rename",
+    "cli",
+    "exif",
+    "photo",
+    "photos",
+    "image"
+  ],
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-es2015": "^6.13.1"
+  }
+}
