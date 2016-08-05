@@ -9,8 +9,11 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-    "build": "babel src -d dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rimraf dist",
+    "build": "rollup -c",
+    "ugl": "uglifyjs dist/* -c -m -o dist/",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "npm test"
   },
   "repository": {
     "type": "git",
@@ -29,8 +32,12 @@
     "image"
   ],
   "devDependencies": {
-    "babel-cli": "^6.11.4",
-    "babel-polyfill": "^6.13.0",
-    "babel-preset-es2015": "^6.13.1"
+    "babel-cli": "6.11.4",
+    "babel-polyfill": "6.13.0",
+    "babel-preset-es2015": "6.13.0",
+    "babel-preset-es2015-rollup": "1.1.1",
+    "rimraf": "2.5.4",
+    "rollup": "0.34.3",
+    "rollup-plugin-babel": "2.6.1"
   }
 }
