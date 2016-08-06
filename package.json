@@ -15,7 +15,6 @@
     "clean": "rimraf dist",
     "lint": "eslint src test",
     "build": "rollup -c",
-    "ugl": "uglifyjs dist/* -c -m -o dist/",
     "test": "ava && npm run lint",
     "prepublish": "npm test"
   },
