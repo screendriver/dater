@@ -22,4 +22,7 @@ program.parse(process.argv);
 
 rename(directoryValue)
   .then(() => console.log(chalk.yellow('Photos renamed')))
-  .catch(() => console.log(chalk.red("Photos can't be renamed")));
+  .catch((err) => {
+    console.log(chalk.red("Photos can't be renamed"));
+    console.log(err);
+  });
