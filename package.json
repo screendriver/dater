@@ -1,5 +1,5 @@
 {
-  "name": "dater-cli",
+  "name": "dater",
   "version": "0.0.1",
   "description": "Rename photos based on their date taken",
   "license": "MIT",
