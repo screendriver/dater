@@ -1,4 +1,5 @@
 /* eslint no-new: "off" */
+
 import 'babel-polyfill';
 
 import fs from 'fs';
