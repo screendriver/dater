@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/screendriver/dater-cli.git"
+    "url": "git+https://github.com/screendriver/dater.git"
   },
   "bugs": {
-    "url": "https://github.com/screendriver/dater-cli/issues"
+    "url": "https://github.com/screendriver/dater/issues"
   },
-  "homepage": "https://github.com/screendriver/dater-cli#readme",
+  "homepage": "https://github.com/screendriver/dater#readme",
   "keywords": [
     "rename",
     "cli",
