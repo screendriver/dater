@@ -24,37 +24,45 @@ function getImages(dirPath) {
   });
 }
 
-function readDate(image) {
+function readExifDate(image, spinner) {
   return new Promise((resolve, reject) => {
     new ExifImage({ image }, (error, exifData) => {
       if (error) {
-        reject(error);
+        if (error.code === 'NO_EXIF_SEGMENT') {
+          if (spinner) {
+            const spinnerInstance = spinner;
+            spinnerInstance.text = `No EXIF data found in ${image}`;
+            spinnerInstance.stopAndPersist();
+          }
+          resolve({ ok: false });
+        } else {
+          reject(error);
+        }
       } else {
-        resolve(exifData.exif.CreateDate);
+        resolve({
+          ok: true,
+          createDate: exifData.exif.CreateDate,
+          filePath: image,
+        });
       }
     });
   });
 }
 
-async function rename(dirPath) {
-  const filePaths = [];
+async function rename(dirPath, spinner) {
+  const exifReads = [];
   const files = await getImages(dirPath);
   for (const file of files) {
     const filePath = url.resolve(dirPath, file);
-    const promise = readDate(filePath).then((rawDate) => {
-      const extName = path.extname(file);
-      const date = moment(rawDate, 'YYYY:MM:DD HH:mm:ss');
-      const newFileName = `${date.format('YYYYMMDD_HHmmss')}.${extName}`;
-      const newFilePath = url.resolve(dirPath, newFileName);
-      return {
-        filePath,
-        newFilePath,
-      };
-    });
-    filePaths.push(promise);
+    exifReads.push(readExifDate(filePath, spinner));
   }
   const renames = [];
-  for (const { filePath, newFilePath } of await Promise.all(filePaths)) {
+  const photos = (await Promise.all(exifReads)).filter(({ ok }) => ok);
+  for (const { filePath, createDate } of photos) {
+    const extName = path.extname(filePath);
+    const date = moment(createDate, 'YYYY:MM:DD HH:mm:ss');
+    const newFileName = `${date.format('YYYYMMDD_HHmmss')}.${extName}`;
+    const newFilePath = url.resolve(dirPath, newFileName);
     const promise = new Promise((resolve, reject) => {
       fs.rename(filePath, newFilePath, (err) => {
         if (err) {
