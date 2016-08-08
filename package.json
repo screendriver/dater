@@ -1,6 +1,6 @@
 {
   "name": "redater",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Rename photos based on their date taken",
   "license": "MIT",
   "author": "Christian Rackerseder <github@echooff.de>",
