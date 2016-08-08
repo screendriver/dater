@@ -6,7 +6,7 @@ import chalk from 'chalk';
 import ora from 'ora';
 import program from 'commander';
 
-import rename from './dater';
+import rename from './redater';
 import { version } from '../package.json';
 
 let directoryValue;

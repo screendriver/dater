@@ -1,12 +1,12 @@
 {
-  "name": "dater",
+  "name": "redater",
   "version": "0.0.1",
   "description": "Rename photos based on their date taken",
   "license": "MIT",
   "author": "Christian Rackerseder <github@echooff.de>",
-  "main": "dist/dater.js",
+  "main": "dist/redater.js",
   "bin": {
-    "dater": "dist/bin.js"
+    "redater": "dist/bin.js"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/screendriver/dater.git"
+    "url": "git+https://github.com/screendriver/redater.git"
   },
   "bugs": {
-    "url": "https://github.com/screendriver/dater/issues"
+    "url": "https://github.com/screendriver/redater/issues"
   },
-  "homepage": "https://github.com/screendriver/dater#readme",
+  "homepage": "https://github.com/screendriver/redater#readme",
   "keywords": [
     "rename",
     "cli",
