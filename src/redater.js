@@ -6,7 +6,6 @@ import fs from 'fs';
 import mime from 'mime';
 import moment from 'moment';
 import path from 'path';
-import url from 'url';
 import { ExifImage } from 'exif';
 
 function getImages(dirPath) {
@@ -53,7 +52,7 @@ async function rename(dirPath, spinner) {
   const exifReads = [];
   const files = await getImages(dirPath);
   for (const file of files) {
-    const filePath = url.resolve(dirPath, file);
+    const filePath = path.resolve(dirPath, file);
     exifReads.push(readExifDate(filePath, spinner));
   }
   const renames = [];
@@ -61,8 +60,8 @@ async function rename(dirPath, spinner) {
   for (const { filePath, createDate } of photos) {
     const extName = path.extname(filePath);
     const date = moment(createDate, 'YYYY:MM:DD HH:mm:ss');
-    const newFileName = `${date.format('YYYYMMDD_HHmmss')}.${extName}`;
-    const newFilePath = url.resolve(dirPath, newFileName);
+    const newFileName = `${date.format('YYYYMMDD_HHmmss')}${extName}`;
+    const newFilePath = path.resolve(dirPath, newFileName);
     const promise = new Promise((resolve, reject) => {
       fs.rename(filePath, newFilePath, (err) => {
         if (err) {
