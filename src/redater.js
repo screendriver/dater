@@ -1,5 +1,3 @@
-/* eslint no-new: "off" */
-
 import 'babel-polyfill';
 
 import fs from 'fs';
@@ -14,8 +12,8 @@ function getImages(dirPath) {
       if (err) {
         reject(err);
       } else {
-        const images = files.filter((file) =>
-          mime.lookup(file).startsWith('image')
+        const images = files.filter(file =>
+          mime.lookup(file).startsWith('image'),
         );
         resolve(images);
       }
@@ -63,7 +61,7 @@ async function rename(dirPath, spinner) {
     const newFileName = `${date.format('YYYYMMDD_HHmmss')}${extName}`;
     const newFilePath = path.resolve(dirPath, newFileName);
     const promise = new Promise((resolve, reject) => {
-      fs.rename(filePath, newFilePath, (err) => {
+      fs.rename(filePath, newFilePath, err => {
         if (err) {
           reject(err);
         } else {
