@@ -1,5 +1,3 @@
-import 'babel-polyfill';
-
 import fs from 'fs';
 import mime from 'mime';
 import moment from 'moment';

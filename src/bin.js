@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-import 'babel-polyfill';
-
 import chalk from 'chalk';
 import ora from 'ora';
 import program from 'commander';
@@ -15,7 +13,7 @@ program
   .version(version)
   .description('Rename photos based on their date taken')
   .arguments('<directory>')
-  .action((directory) => {
+  .action(directory => {
     directoryValue = directory;
   });
 
@@ -27,7 +25,7 @@ rename(directoryValue, spinner)
     spinner.text = 'Renamed';
     spinner.succeed();
   })
-  .catch((err) => {
+  .catch(err => {
     spinner.text = "Photos can't be renamed";
     spinner.fail();
     console.log(chalk.red(err.stack));
