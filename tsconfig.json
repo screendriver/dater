@@ -3,7 +3,6 @@
     "target": "es2015",
     "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": true,
     "outDir": "./dist",
     "noEmitOnError": true,
     "importHelpers": true,
