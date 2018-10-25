@@ -6,17 +6,17 @@
   "author": "Christian Rackerseder <github@echooff.de>",
   "main": "dist/redater.js",
   "bin": {
-    "redater": "dist/bin.js"
+    "redater": "dist/src/bin.js"
   },
   "engines": {
     "node": ">=6.5.0"
   },
   "scripts": {
     "precommit": "pretty-quick --staged",
-    "lint": "tslint -c tslint.json 'src/**/*.ts' 'test/**/*.ts'",
-    "test:unit": "tape -r source-map-support/register 'dist/test/unit/**/*.js' | tap-spec",
     "clean": "rimraf dist",
     "build": "tsc",
+    "lint": "tslint -c tslint.json 'src/**/*.ts' 'test/**/*.ts'",
+    "test:unit": "tape -r source-map-support/register 'dist/test/**/*.js' | tap-spec",
     "test": "yarn run lint && yarn run test:unit"
   },
   "repository": {
