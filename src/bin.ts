@@ -7,7 +7,7 @@ import program from 'commander';
 import rename from './redater';
 import { version } from '../package.json';
 
-let directoryValue;
+let directoryValue!: string;
 
 program
   .version(version)
@@ -28,5 +28,6 @@ rename(directoryValue, spinner)
   .catch(err => {
     spinner.text = "Photos can't be renamed";
     spinner.fail();
+    // tslint:disable-next-line
     console.log(chalk.red(err.stack));
   });

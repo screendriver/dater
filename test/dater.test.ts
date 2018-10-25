@@ -1,8 +1,12 @@
-import test from 'ava';
+import test from 'tape';
 
 import rename from '../src/redater';
 
 test('should fail on invalid path', async t => {
-  const { code } = await t.throws(rename('./foo'));
-  t.is(code, 'ENOENT');
+  t.plan(1);
+  try {
+    await rename('./foo');
+  } catch (e) {
+    t.is(e.code, 'ENOENT', 'e.code equals "ENOENT"');
+  }
 });
