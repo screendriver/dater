@@ -1,22 +1,4 @@
 {
-  "compilerOptions": {
-    "target": "es2015",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "outDir": "./dist",
-    "noEmitOnError": true,
-    "importHelpers": true,
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "plugins": [{ "name": "typescript-tslint-plugin" }],
-    "typeRoots": ["./node_modules/@types", "./typings"]
-  },
-  "include": ["src/**/*", "test/**/*"],
-  "exclude": ["node_modules"]
+  "files": [],
+  "references": [{ "path": "./src" }, { "path": "./test" }]
 }

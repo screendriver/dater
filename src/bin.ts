@@ -5,12 +5,11 @@ import ora from 'ora';
 import program from 'commander';
 
 import rename from './redater';
-import { version } from '../package.json';
 
 let directoryValue!: string;
 
 program
-  .version(version)
+  .version('0.0.3')
   .description('Rename photos based on their date taken')
   .arguments('<directory>')
   .action(directory => {
