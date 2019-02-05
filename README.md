@@ -2,7 +2,7 @@
 
 📸 Rename photos based on their date taken
 
-[![Build Status](https://travis-ci.org/screendriver/redater.svg?branch=master)](https://travis-ci.org/screendriver/redater)
+[![Build Status](https://dev.azure.com/screendriver/redater/_apis/build/status/screendriver.redater?branchName=master)](https://dev.azure.com/screendriver/redater/_build/latest?definitionId=7&branchName=master)
 
 ## Install
 
