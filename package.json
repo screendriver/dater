@@ -12,7 +12,6 @@
     "node": ">=6.5.0"
   },
   "scripts": {
-    "precommit": "pretty-quick --staged",
     "clean": "rimraf dist",
     "build": "tsc --build",
     "lint": "tslint -c tslint.json 'src/**/*.ts' 'test/**/*.ts'",
