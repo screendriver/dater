@@ -16,6 +16,7 @@
     "build": "tsc --build",
     "lint": "tslint -c tslint.json 'src/**/*.ts' 'test/**/*.ts'",
     "prettier:check": "prettier --check 'src/**/*.ts?(x)' 'test/**/*.ts?(x)'",
+    "copy:paste:detector": "jscpd src test typings",
     "test:unit": "tape -r source-map-support/register 'dist/test/**/*.js'",
     "test": "yarn lint && yarn test:unit | tap-dot",
     "test:ci": "yarn lint && yarn test:unit | tap-xunit > test-results.xml"
