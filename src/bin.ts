@@ -1,10 +1,8 @@
 #!/usr/bin/env node
-
 import chalk from 'chalk';
 import ora from 'ora';
 import program from 'commander';
-
-import rename from './redater';
+import { rename } from './redater';
 
 let directoryValue!: string;
 

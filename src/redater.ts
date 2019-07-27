@@ -63,7 +63,7 @@ function readExifDate(image: string, spinner?: Ora) {
   });
 }
 
-async function rename(dirPath: string, spinner?: Ora) {
+export async function rename(dirPath: string, spinner?: Ora) {
   const exifReads: Array<Promise<NoExifDate | ExifDate>> = [];
   const files = await getImages(dirPath);
   for (const file of files) {
@@ -92,5 +92,3 @@ async function rename(dirPath: string, spinner?: Ora) {
   }
   await Promise.all(renames);
 }
-
-export default rename;

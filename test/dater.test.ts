@@ -1,6 +1,6 @@
 import test from 'tape';
 
-import rename from '../src/redater';
+import { rename } from '../src/redater';
 
 test('should fail on invalid path', async t => {
   t.plan(1);
