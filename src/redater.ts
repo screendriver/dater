@@ -3,6 +3,7 @@ import mime from 'mime';
 import moment from 'moment';
 import path from 'path';
 import { ExifImage } from 'exif';
+import { Ora } from 'ora';
 
 interface NoExifDate {
   ok: boolean;
@@ -14,7 +15,7 @@ interface ExifDate {
   filePath: string;
 }
 
-function getImages(dirPath: string): Promise<string[]> {
+function getImages(dirPath: string): Promise<readonly string[]> {
   return new Promise((resolve, reject) => {
     fs.readdir(dirPath, (err, files) => {
       if (err) {
@@ -33,7 +34,7 @@ function getImages(dirPath: string): Promise<string[]> {
   });
 }
 
-function readExifDate(image: string, spinner?: any) {
+function readExifDate(image: string, spinner?: Ora) {
   return new Promise<NoExifDate | ExifDate>((resolve, reject) => {
     // tslint:disable-next-line
     new ExifImage(
@@ -62,8 +63,8 @@ function readExifDate(image: string, spinner?: any) {
   });
 }
 
-async function rename(dirPath: string, spinner?: any) {
-  const exifReads = [];
+async function rename(dirPath: string, spinner?: Ora) {
+  const exifReads: Array<Promise<NoExifDate | ExifDate>> = [];
   const files = await getImages(dirPath);
   for (const file of files) {
     const filePath = path.resolve(dirPath, file);
