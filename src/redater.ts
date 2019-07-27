@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs-extra';
 import mime from 'mime';
 import moment from 'moment';
 import path from 'path';
