@@ -69,7 +69,7 @@ async function rename(dirPath: string, spinner?: any) {
     const filePath = path.resolve(dirPath, file);
     exifReads.push(readExifDate(filePath, spinner));
   }
-  const renames: Array<Promise<{}>> = [];
+  const renames: Array<Promise<unknown>> = [];
   const photos = (await Promise.all(exifReads)).filter(
     (date): date is ExifDate => date.ok,
   );
