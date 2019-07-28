@@ -15,6 +15,7 @@ export function filterImages(files: readonly Path[]): readonly Path[] {
   });
 }
 
-export function resolveImageFullPath(dirPath: Path, imageName: string): Path {
-  return path.resolve(dirPath, imageName);
-}
+export const resolveImagesFullPath = (dirPath: Path) => (
+  imageNames: readonly Path[],
+): readonly Path[] =>
+  imageNames.map(imageName => path.resolve(dirPath, imageName));

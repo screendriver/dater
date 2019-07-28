@@ -3,7 +3,7 @@ import path from 'path';
 import {
   getAllFiles,
   filterImages,
-  resolveImageFullPath,
+  resolveImagesFullPath,
 } from '../src/directory';
 
 test('getAllFiles() returns all files from given directory path', async t => {
@@ -21,9 +21,15 @@ test('filterImages() filters all images from given files', t => {
   t.deepEqual(actual, expected);
 });
 
-test('resolveImageFullPath() returns the absolute path of the given image', t => {
+test('resolveImagesFullPath() returns the absolute path of the given image', t => {
   t.plan(1);
-  const actual = resolveImageFullPath('./test/assets', 'test-image.jpg');
-  const expected = path.resolve('./test/assets', 'test-image.jpg');
-  t.equal(actual, expected);
+  const actual = resolveImagesFullPath('./test/assets')([
+    'test-image.jpg',
+    'next-image.jpg',
+  ]);
+  const expected = [
+    path.resolve('./test/assets', 'test-image.jpg'),
+    path.resolve('./test/assets', 'next-image.jpg'),
+  ];
+  t.deepEqual(actual, expected);
 });
