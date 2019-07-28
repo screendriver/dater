@@ -12,30 +12,35 @@ export interface ExifDate {
 }
 
 export const readExifDate = (spinner: Ora) => (
-  image: string,
-): Promise<NoExifDate | ExifDate> => {
-  return new Promise((resolve, reject) => {
-    // tslint:disable-next-line
-    new ExifImage(
-      { image },
-      (error: { code: string }, exifData: { exif: { CreateDate: string } }) => {
-        if (error) {
-          if (error.code === 'NO_EXIF_SEGMENT') {
-            const spinnerInstance = spinner;
-            spinnerInstance.text = `No EXIF data found in ${image}`;
-            spinnerInstance.stopAndPersist();
-            resolve({ ok: false });
+  imagePaths: readonly string[],
+): ReadonlyArray<Promise<NoExifDate | ExifDate>> => {
+  return imagePaths.map(image => {
+    return new Promise((resolve, reject) => {
+      // tslint:disable-next-line
+      new ExifImage(
+        { image },
+        (
+          error: { code: string },
+          exifData: { exif: { CreateDate: string } },
+        ) => {
+          if (error) {
+            if (error.code === 'NO_EXIF_SEGMENT') {
+              const spinnerInstance = spinner;
+              spinnerInstance.text = `No EXIF data found in ${image}`;
+              spinnerInstance.stopAndPersist();
+              resolve({ ok: false });
+            } else {
+              reject(error);
+            }
           } else {
-            reject(error);
+            resolve({
+              ok: true,
+              createDate: exifData.exif.CreateDate,
+              filePath: image,
+            });
           }
-        } else {
-          resolve({
-            ok: true,
-            createDate: exifData.exif.CreateDate,
-            filePath: image,
-          });
-        }
-      },
-    );
+        },
+      );
+    });
   });
 };
