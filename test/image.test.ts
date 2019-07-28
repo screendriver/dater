@@ -8,7 +8,7 @@ test('returns "not ok" when image has no exif data', async t => {
   const image = './test/assets/test-image.jpg';
   const stopAndPersist = sinon.fake();
   const spinner: Partial<Ora> = { stopAndPersist };
-  const actual = await readExifDate(image, spinner as Ora);
+  const actual = await readExifDate(spinner as Ora)(image);
   const expected: NoExifDate = { ok: false };
   t.deepEqual(actual, expected);
 });
@@ -18,7 +18,7 @@ test('stops spinner and sets a text on it when image has no exif data', async t 
   const image = './test/assets/test-image.jpg';
   const stopAndPersist = sinon.fake();
   const spinner: Partial<Ora> = { stopAndPersist };
-  await readExifDate(image, spinner as Ora);
+  await readExifDate(spinner as Ora)(image);
   t.equal(spinner.text, 'No EXIF data found in ./test/assets/test-image.jpg');
   t.equal(stopAndPersist.callCount, 1);
 });
@@ -28,7 +28,7 @@ test('returns "ok" when image has exif data', async t => {
   const image = './test/assets/test-image-exif.jpg';
   const stopAndPersist = sinon.fake();
   const spinner: Partial<Ora> = { stopAndPersist };
-  const actual = await readExifDate(image, spinner as Ora);
+  const actual = await readExifDate(spinner as Ora)(image);
   const expected: ExifDate = {
     ok: true,
     createDate: '2006:08:19 17:39:00',
@@ -43,7 +43,7 @@ test('rejecets when image could not be found', async t => {
   const stopAndPersist = sinon.fake();
   const spinner: Partial<Ora> = { stopAndPersist };
   try {
-    await readExifDate(image, spinner as Ora);
+    await readExifDate(spinner as Ora)(image);
   } catch (e) {
     const expected = e.message.includes(
       "ENOENT: no such file or directory, open './non-existing-image.jpg",

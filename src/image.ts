@@ -11,10 +11,9 @@ export interface ExifDate {
   filePath: string;
 }
 
-export function readExifDate(
+export const readExifDate = (spinner: Ora) => (
   image: string,
-  spinner: Ora,
-): Promise<NoExifDate | ExifDate> {
+): Promise<NoExifDate | ExifDate> => {
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
     new ExifImage(
@@ -39,4 +38,4 @@ export function readExifDate(
       },
     );
   });
-}
+};
