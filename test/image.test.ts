@@ -5,7 +5,7 @@ import { readExifDate, NoExifDate, ExifDate } from '../src/image';
 
 test('returns "not ok" when image has no exif data', async t => {
   t.plan(1);
-  const image = './test/test-image.jpg';
+  const image = './test/assets/test-image.jpg';
   const stopAndPersist = sinon.fake();
   const spinner: Partial<Ora> = { stopAndPersist };
   const actual = await readExifDate(image, spinner as Ora);
@@ -15,24 +15,24 @@ test('returns "not ok" when image has no exif data', async t => {
 
 test('stops spinner and sets a text on it when image has no exif data', async t => {
   t.plan(2);
-  const image = './test/test-image.jpg';
+  const image = './test/assets/test-image.jpg';
   const stopAndPersist = sinon.fake();
   const spinner: Partial<Ora> = { stopAndPersist };
   await readExifDate(image, spinner as Ora);
-  t.equal(spinner.text, 'No EXIF data found in ./test/test-image.jpg');
+  t.equal(spinner.text, 'No EXIF data found in ./test/assets/test-image.jpg');
   t.equal(stopAndPersist.callCount, 1);
 });
 
 test('returns "ok" when image has exif data', async t => {
   t.plan(1);
-  const image = './test/test-image-exif.jpg';
+  const image = './test/assets/test-image-exif.jpg';
   const stopAndPersist = sinon.fake();
   const spinner: Partial<Ora> = { stopAndPersist };
   const actual = await readExifDate(image, spinner as Ora);
   const expected: ExifDate = {
     ok: true,
     createDate: '2006:08:19 17:39:00',
-    filePath: './test/test-image-exif.jpg',
+    filePath: './test/assets/test-image-exif.jpg',
   };
   t.deepEqual(actual, expected);
 });
