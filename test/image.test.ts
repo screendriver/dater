@@ -61,12 +61,10 @@ test('readExifDate() rejecets when image could not be found', async t => {
 
 test('filterExifDates() filters given elements with ExifDate', async t => {
   t.plan(1);
-  const exifDates: Promise<
-    ReadonlyArray<NoExifDate | ExifDate>
-  > = Promise.resolve([
+  const exifDates: Array<NoExifDate | ExifDate> = [
     { ok: true },
     { ok: false, createDate: '', filePath: '' },
-  ]);
+  ];
   const actual = await filterExifDates(exifDates);
   const expected = [{ ok: true }];
   t.deepEqual(actual, expected);

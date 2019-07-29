@@ -48,9 +48,8 @@ export const readExifDate = (spinner: Ora) => (
   return Promise.all(exifDates);
 };
 
-export async function filterExifDates(
-  exifDates: ArrayOfExifDates,
-): Promise<readonly ExifDate[]> {
-  const result = await exifDates;
-  return result.filter((exifDate): exifDate is ExifDate => exifDate.ok);
+export function filterExifDates(
+  exifDates: ReadonlyArray<NoExifDate | ExifDate>,
+): readonly ExifDate[] {
+  return exifDates.filter((exifDate): exifDate is ExifDate => exifDate.ok);
 }
