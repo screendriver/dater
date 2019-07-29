@@ -1,8 +1,8 @@
 import { Ora } from 'ora';
 import { ExifImage } from 'exif';
 import path from 'path';
-import moment from 'moment';
 import fse from 'fs-extra';
+import { parse, format } from 'date-fns';
 
 export interface NoExifDate {
   ok: boolean;
@@ -60,8 +60,8 @@ export const renameExifDates = (dirPath: string) => (fs: typeof fse) => (
 ): Promise<readonly string[]> => {
   const renames = exifDates.map(async ({ filePath, createDate }) => {
     const extName = path.extname(filePath);
-    const date = moment(createDate, 'YYYY:MM:DD HH:mm:ss');
-    const newFileName = `${date.format('YYYYMMDD_HHmmss')}${extName}`;
+    const date = parse(createDate, 'yyyy:MM:dd HH:mm:ss', new Date());
+    const newFileName = `${format(date, 'yyyyMMdd_HHmmss')}${extName}`;
     const newFilePath = path.resolve(dirPath, newFileName);
     await fs.rename(filePath, newFilePath);
     return newFilePath;

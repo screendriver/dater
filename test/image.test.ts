@@ -73,7 +73,7 @@ test('filterExifDates() filters given elements with ExifDate', async t => {
   t.deepEqual(actual, expected);
 });
 
-test('renameExifDates() should set filenames with the patttern "YYYYMMDD_HHmmss"', async t => {
+test('renameExifDates() should set filenames with the patttern "yyyyMMdd_HHmmss"', async t => {
   t.plan(1);
   const fs: Partial<typeof fse> = {
     rename: sinon.fake.resolves(undefined),
