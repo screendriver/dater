@@ -1,9 +1,14 @@
 import test from 'tape';
 import { Ora } from 'ora';
 import sinon from 'sinon';
-import { readExifDate, NoExifDate, ExifDate } from '../src/image';
+import {
+  readExifDate,
+  NoExifDate,
+  ExifDate,
+  filterExifDates,
+} from '../src/image';
 
-test('returns "not ok" when image has no exif data', async t => {
+test('readExifDate() returns "not ok" when image has no exif data', async t => {
   t.plan(1);
   const images = ['./test/assets/test-image.jpg'];
   const stopAndPersist = sinon.fake();
@@ -13,7 +18,7 @@ test('returns "not ok" when image has no exif data', async t => {
   t.deepEqual(actual, expected);
 });
 
-test('stops spinner and sets a text on it when image has no exif data', async t => {
+test('readExifDate() stops spinner and sets a text on it when image has no exif data', async t => {
   t.plan(2);
   const images = ['./test/assets/test-image.jpg'];
   const stopAndPersist = sinon.fake();
@@ -23,7 +28,7 @@ test('stops spinner and sets a text on it when image has no exif data', async t 
   t.equal(stopAndPersist.callCount, 1);
 });
 
-test('returns "ok" when image has exif data', async t => {
+test('readExifDate() returns "ok" when image has exif data', async t => {
   t.plan(1);
   const images = ['./test/assets/test-image-exif.jpg'];
   const stopAndPersist = sinon.fake();
@@ -39,7 +44,7 @@ test('returns "ok" when image has exif data', async t => {
   t.deepEqual(actual, expected);
 });
 
-test('rejecets when image could not be found', async t => {
+test('readExifDate() rejecets when image could not be found', async t => {
   t.plan(1);
   const images = ['./non-existing-image.jpg'];
   const stopAndPersist = sinon.fake();
@@ -52,4 +57,15 @@ test('rejecets when image could not be found', async t => {
     );
     t.true(expected);
   }
+});
+
+test('filterExifDates() filters given elements with ExifDate', async t => {
+  t.plan(1);
+  const exifDates: Promise<NoExifDate | ExifDate>[] = [
+    Promise.resolve({ ok: true }),
+    Promise.resolve({ ok: false, createDate: '', filePath: '' }),
+  ];
+  const actual = await filterExifDates(exifDates);
+  const expected = [{ ok: true }];
+  t.deepEqual(actual, expected);
 });
