@@ -11,11 +11,9 @@ export interface ExifDate {
   filePath: string;
 }
 
-type ArrayOfExifDates = Promise<ReadonlyArray<NoExifDate | ExifDate>>;
-
 export const readExifDate = (spinner: Ora) => (
   imagePaths: readonly string[],
-): ArrayOfExifDates => {
+): Promise<ReadonlyArray<NoExifDate | ExifDate>> => {
   const exifDates = imagePaths.map(image => {
     return new Promise<NoExifDate | ExifDate>((resolve, reject) => {
       // tslint:disable-next-line
