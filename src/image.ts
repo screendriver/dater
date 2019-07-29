@@ -1,5 +1,8 @@
 import { Ora } from 'ora';
 import { ExifImage } from 'exif';
+import path from 'path';
+import moment from 'moment';
+import fse from 'fs-extra';
 
 export interface NoExifDate {
   ok: boolean;
@@ -51,3 +54,17 @@ export function filterExifDates(
 ): readonly ExifDate[] {
   return exifDates.filter((exifDate): exifDate is ExifDate => exifDate.ok);
 }
+
+export const renameExifDates = (dirPath: string) => (fs: typeof fse) => (
+  exifDates: readonly ExifDate[],
+): Promise<readonly string[]> => {
+  const renames = exifDates.map(async ({ filePath, createDate }) => {
+    const extName = path.extname(filePath);
+    const date = moment(createDate, 'YYYY:MM:DD HH:mm:ss');
+    const newFileName = `${date.format('YYYYMMDD_HHmmss')}${extName}`;
+    const newFilePath = path.resolve(dirPath, newFileName);
+    await fs.rename(filePath, newFilePath);
+    return newFilePath;
+  });
+  return Promise.all(renames);
+};
