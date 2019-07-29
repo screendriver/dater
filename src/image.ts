@@ -11,13 +11,13 @@ export interface ExifDate {
   filePath: string;
 }
 
-type ArrayOfExifDates = ReadonlyArray<Promise<NoExifDate | ExifDate>>;
+type ArrayOfExifDates = Promise<ReadonlyArray<NoExifDate | ExifDate>>;
 
 export const readExifDate = (spinner: Ora) => (
   imagePaths: readonly string[],
 ): ArrayOfExifDates => {
-  return imagePaths.map(image => {
-    return new Promise((resolve, reject) => {
+  const exifDates = imagePaths.map(image => {
+    return new Promise<NoExifDate | ExifDate>((resolve, reject) => {
       // tslint:disable-next-line
       new ExifImage(
         { image },
@@ -45,11 +45,12 @@ export const readExifDate = (spinner: Ora) => (
       );
     });
   });
+  return Promise.all(exifDates);
 };
 
 export async function filterExifDates(
   exifDates: ArrayOfExifDates,
 ): Promise<readonly ExifDate[]> {
-  const result = await Promise.all(exifDates);
+  const result = await exifDates;
   return result.filter((exifDate): exifDate is ExifDate => exifDate.ok);
 }
