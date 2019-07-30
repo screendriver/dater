@@ -4,9 +4,9 @@
   "description": "Rename photos based on their date taken",
   "license": "MIT",
   "author": "Christian Rackerseder <github@echooff.de>",
-  "main": "dist/redater.js",
+  "main": "target/src/redater.js",
   "bin": {
-    "redater": "dist/src/bin.js"
+    "redater": "target/src/bin.js"
   },
   "engines": {
     "node": ">=6.5.0"
