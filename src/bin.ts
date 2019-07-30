@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import chalk from 'chalk';
-import ora from 'ora';
+import ora, { Ora } from 'ora';
 import program from 'commander';
 import { rename } from './redater';
 
@@ -17,7 +17,15 @@ program
 program.parse(process.argv);
 
 const spinner = ora('Renaming photos').start();
-rename(directoryValue, spinner)
+
+function setSpinnerText(spinnerInstance: Ora) {
+  return (text: string) => {
+    spinnerInstance.text = text;
+    spinnerInstance.stopAndPersist();
+  };
+}
+
+rename(directoryValue, setSpinnerText(spinner))
   .then(() => {
     spinner.text = 'Renamed';
     spinner.succeed();

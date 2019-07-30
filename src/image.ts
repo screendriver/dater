@@ -1,20 +1,20 @@
-import { Ora } from 'ora';
 import { ExifImage } from 'exif';
 import path from 'path';
 import fse from 'fs-extra';
 import { parse, format } from 'date-fns/fp';
 
 export interface NoExifDate {
-  ok: boolean;
+  ok: false;
+  filePath: string;
 }
 
 export interface ExifDate {
-  ok: boolean;
+  ok: true;
   createDate: string;
   filePath: string;
 }
 
-export const readExifDate = (spinner: Ora) => (
+export const readExifDate = (setSpinnerText: (text: string) => void) => (
   imagePaths: readonly string[],
 ): Promise<ReadonlyArray<NoExifDate | ExifDate>> => {
   const exifDates = imagePaths.map(image => {
@@ -28,10 +28,8 @@ export const readExifDate = (spinner: Ora) => (
         ) => {
           if (error) {
             if (error.code === 'NO_EXIF_SEGMENT') {
-              const spinnerInstance = spinner;
-              spinnerInstance.text = `No EXIF data found in ${image}`;
-              spinnerInstance.stopAndPersist();
-              resolve({ ok: false });
+              setSpinnerText(`No EXIF data found in ${image}`);
+              resolve({ ok: false, filePath: image });
             } else {
               reject(error);
             }
