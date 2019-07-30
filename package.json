@@ -39,6 +39,9 @@
     "photos",
     "image"
   ],
+  "files": [
+    "target/src/**/*.js"
+  ],
   "dependencies": {
     "chalk": "2.4.2",
     "commander": "2.20.0",
