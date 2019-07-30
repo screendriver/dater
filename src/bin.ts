@@ -7,7 +7,7 @@ import { rename } from './redater';
 let directoryValue!: string;
 
 program
-  .version('0.0.3')
+  .version('0.1.0')
   .description('Rename photos based on their date taken')
   .arguments('<directory>')
   .action(directory => {
