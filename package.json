@@ -42,7 +42,7 @@
   "dependencies": {
     "chalk": "2.4.2",
     "commander": "2.20.0",
-    "date-fns": "2.0.0-beta.3",
+    "date-fns": "2.0.0-beta.4",
     "exif": "0.6.0",
     "fs-extra": "8.1.0",
     "mime": "2.4.4",
