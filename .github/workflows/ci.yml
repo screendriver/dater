@@ -20,7 +20,6 @@ jobs:
       - name: Check source code
         run: |
           yarn lint
-          yarn prettier:check
           yarn copy:paste:detector
       - name: Compile source code
         run: yarn build
