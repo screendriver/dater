@@ -1,5 +1,3 @@
-import test from 'tape';
-import sinon from 'sinon';
 import fse from 'fs-extra';
 import path from 'path';
 import {
@@ -10,31 +8,27 @@ import {
   renameExifDates,
 } from '../src/image';
 
-test('readExifDate() returns "not ok" when image has no exif data', async t => {
-  t.plan(1);
+test('readExifDate() returns "not ok" when image has no exif data', async () => {
   const images = ['./test/assets/test-image.jpg'];
-  const actual = await readExifDate(sinon.fake())(images);
+  const actual = await readExifDate(jest.fn())(images);
   const expected: [NoExifDate] = [
     { ok: false, filePath: './test/assets/test-image.jpg' },
   ];
-  t.deepEqual(actual, expected);
+  expect(actual).toEqual(expected);
 });
 
-test('readExifDate() sets spinner text when image has no exif data', async t => {
-  t.plan(1);
+test('readExifDate() sets spinner text when image has no exif data', async () => {
   const images = ['./test/assets/test-image.jpg'];
-  const setSpinnerText = sinon.fake();
+  const setSpinnerText = jest.fn();
   await readExifDate(setSpinnerText)(images);
-  const called = setSpinnerText.calledWith(
+  expect(setSpinnerText).toHaveBeenCalledWith(
     'No EXIF data found in ./test/assets/test-image.jpg',
   );
-  t.true(called);
 });
 
-test('readExifDate() returns "ok" when image has exif data', async t => {
-  t.plan(1);
+test('readExifDate() returns "ok" when image has exif data', async () => {
   const images = ['./test/assets/test-image-exif.jpg'];
-  const actual = await readExifDate(sinon.fake())(images);
+  const actual = await readExifDate(jest.fn())(images);
   const expected: ExifDate[] = [
     {
       ok: true,
@@ -42,37 +36,34 @@ test('readExifDate() returns "ok" when image has exif data', async t => {
       filePath: './test/assets/test-image-exif.jpg',
     },
   ];
-  t.deepEqual(actual, expected);
+  expect(actual).toEqual(expected);
 });
 
-test('readExifDate() rejecets when image could not be found', async t => {
-  t.plan(1);
+test('readExifDate() rejecets when image could not be found', async () => {
   const images = ['./non-existing-image.jpg'];
   try {
-    await readExifDate(sinon.fake())(images);
+    await readExifDate(jest.fn())(images);
   } catch (e) {
     const expected = e.message.includes(
       "ENOENT: no such file or directory, open './non-existing-image.jpg",
     );
-    t.true(expected);
+    expect(expected).toBe(true);
   }
 });
 
-test('filterExifDates() filters given elements with ExifDate', async t => {
-  t.plan(1);
+test('filterExifDates() filters given elements with ExifDate', async () => {
   const exifDates: Array<NoExifDate | ExifDate> = [
     { ok: false, filePath: '' },
     { ok: true, createDate: '', filePath: '' },
   ];
   const actual = await filterExifDates(exifDates);
   const expected = [{ ok: true, createDate: '', filePath: '' }];
-  t.deepEqual(actual, expected);
+  expect(actual).toEqual(expected);
 });
 
-test('renameExifDates() should set filenames with the patttern "yyyyMMdd_HHmmss"', async t => {
-  t.plan(1);
+test('renameExifDates() should set filenames with the patttern "yyyyMMdd_HHmmss"', async () => {
   const fs: Partial<typeof fse> = {
-    rename: sinon.fake.resolves(undefined),
+    rename: jest.fn().mockResolvedValue(undefined),
   };
   const exifDates: ExifDate[] = [
     {
@@ -85,5 +76,5 @@ test('renameExifDates() should set filenames with the patttern "yyyyMMdd_HHmmss"
     exifDates,
   );
   const expected = [path.resolve('./test/assets/20190729_092500.jpg')];
-  t.deepEqual(actual, expected);
+  expect(actual).toEqual(expected);
 });
