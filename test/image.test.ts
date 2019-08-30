@@ -51,12 +51,12 @@ test('readExifDate() rejecets when image could not be found', async () => {
   }
 });
 
-test('filterExifDates() filters given elements with ExifDate', async () => {
+test('filterExifDates() filters given elements with ExifDate', () => {
   const exifDates: Array<NoExifDate | ExifDate> = [
     { ok: false, filePath: '' },
     { ok: true, createDate: '', filePath: '' },
   ];
-  const actual = await filterExifDates(exifDates);
+  const actual = filterExifDates(exifDates);
   const expected = [{ ok: true, createDate: '', filePath: '' }];
   expect(actual).toEqual(expected);
 });
