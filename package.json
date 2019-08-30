@@ -16,7 +16,7 @@
     "build": "tsc --build",
     "lint": "eslint --ignore-path .gitignore --ext ts src test",
     "copy:paste:detector": "jscpd src test typings",
-    "test:unit": "jest target/test"
+    "test:unit": "jest test"
   },
   "repository": {
     "type": "git",
