@@ -1,6 +1,6 @@
 # redater
 
-<a href="https://github.com/screendriver/redater"><img alt="GitHub Actions status" src="https://github.com/screendriver/redater/workflows/CI/badge.svg"></a>
+[![GitHub Actions status](https://github.com/screendriver/redater/workflows/CI/badge.svg)](https://github.com/screendriver/redater/actions)
 
 📸 Rename photos based on their date taken
 
