@@ -2,6 +2,7 @@
 
 [![GitHub Actions status](https://github.com/screendriver/redater/workflows/CI/badge.svg)](https://github.com/screendriver/redater/actions)
 [![Total alerts](https://img.shields.io/lgtm/alerts/github/screendriver/redater.svg)](https://lgtm.com/projects/g/screendriver/redater/alerts/)
+[![codecov](https://codecov.io/gh/screendriver/cibulb/branch/master/graph/badge.svg)](https://codecov.io/gh/screendriver/cibulb)
 
 📸 Rename photos based on their date taken
 
