@@ -16,7 +16,8 @@
     "build": "tsc --build",
     "lint": "eslint --ignore-path .gitignore --ext ts src test",
     "copy:paste:detector": "jscpd src test typings",
-    "test:unit": "ava"
+    "test:unit": "ava",
+    "test:unit:coverage": "nyc ava"
   },
   "repository": {
     "type": "git",
