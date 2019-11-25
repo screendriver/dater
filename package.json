@@ -40,7 +40,7 @@
   ],
   "dependencies": {
     "chalk": "3.0.0",
-    "commander": "2.20.3",
+    "commander": "4.0.1",
     "date-fns": "2.8.1",
     "exif": "0.6.0",
     "fs-extra": "8.1.0",
