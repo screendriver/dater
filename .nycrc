@@ -4,12 +4,14 @@
   "report-dir": "target/coverage",
   "cache-dir": "target/.cache",
   "exclude-after-remap": false,
+  "require": ["ts-node/register/transpile-only"],
+  "extension": [".ts"],
   "include": [
-    "target/src/**/*.js"
+    "src/**/*"
   ],
   "exclude": [
-    "target/src/bin.js",
-    "target/src/redater.js"
+    "src/bin.ts",
+    "src/redater.ts"
   ],
   "reporter": [
     "lcov",
