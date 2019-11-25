@@ -16,8 +16,8 @@
     "build": "tsc --build",
     "lint": "eslint --ignore-path .gitignore --ext ts src test",
     "copy:paste:detector": "jscpd src test typings",
-    "test:unit": "ava",
-    "test:unit:coverage": "nyc ava"
+    "test:unit": "TS_NODE_PROJECT=tsconfig.base.json mocha",
+    "test:unit:coverage": "TS_NODE_PROJECT=tsconfig.base.json nyc mocha"
   },
   "repository": {
     "type": "git",
@@ -50,20 +50,25 @@
     "tslib": "1.10.0"
   },
   "devDependencies": {
+    "@types/chai": "4.2.5",
     "@types/fs-extra": "8.0.1",
     "@types/mime": "2.0.1",
+    "@types/mocha": "5.2.7",
     "@types/sinon": "7.5.1",
     "@typescript-eslint/eslint-plugin": "2.8.0",
     "@typescript-eslint/parser": "2.8.0",
-    "ava": "2.3.0",
-    "eslint": "6.6.0",
+    "chai": "4.2.0",
+    "eslint": "6.7.1",
     "eslint-config-prettier": "6.7.0",
+    "eslint-plugin-mocha": "6.2.2",
     "eslint-plugin-prettier": "3.1.1",
     "jscpd": "2.0.16",
+    "mocha": "6.2.2",
     "nyc": "14.1.1",
     "prettier": "1.19.1",
     "rimraf": "3.0.0",
     "sinon": "7.5.0",
+    "ts-node": "8.5.2",
     "typescript": "3.7.2"
   }
 }
